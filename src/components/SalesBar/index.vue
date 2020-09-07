@@ -33,9 +33,16 @@ export default {
         top: 10
       },
       grid: {
-        left: '12%',
+        left: '3%',
         right: '4%',
-        bottom: '3%'
+        bottom: '3%',
+        containLabel: true
+      },
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow'
+        }
       },
       xAxis: {
         type: 'value',
