@@ -9,6 +9,11 @@ import '@/styles/reset.scss'
 Vue.config.productionTip = false
 
 Vue.prototype.$echarts = ECharts
+Vue.prototype.$bmap = window.BMapGL
+Vue.prototype.$initMap = window.initMap
+Vue.prototype.$mapvgl = window.mapvgl
+Vue.prototype.$mapv = window.mapv
+Vue.prototype.$purpleStyle = window.purpleStyle
 
 Vue.component('vue-echarts', VueECharts)
 
