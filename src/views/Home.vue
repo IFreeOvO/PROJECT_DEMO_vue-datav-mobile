@@ -7,6 +7,7 @@
       <sale-pie></sale-pie>
       <sale-map></sale-map>
       <sale-sun></sale-sun>
+      <sales-radar></sales-radar>
     </div>
   </div>
 </template>
@@ -18,6 +19,7 @@ import SaleLine from '@/components/SaleLine'
 import SalePie from '@/components/SalePie'
 import SaleMap from '@/components/SaleMap'
 import SaleSun from '@/components/SalesSun'
+import SalesRadar from '@/components/SalesRadar'
 
 export default {
   name: 'Home',
@@ -28,7 +30,8 @@ export default {
     SaleLine,
     SalePie,
     SaleMap,
-    SaleSun
+    SaleSun,
+    SalesRadar
   },
 
   data () {
