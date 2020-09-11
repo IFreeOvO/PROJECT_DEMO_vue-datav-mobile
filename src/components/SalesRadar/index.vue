@@ -9,59 +9,45 @@
 <script>
 export default {
   name: 'SalesRadar',
+
   data() {
     return {
       options: {
       }
     }
   },
-  mounted() {
-    // 渲染echarts雷达图
-    this.options = {
-      radar: {
-        name: {},
-        indicator: [{
-          name: '订单量',
-          max: 6500
-        },
-        {
-          name: '骑手量',
-          max: 16000
-        },
-        {
-          name: '访问量',
-          max: 30000
-        },
-        {
-          name: '客服',
-          max: 38000
-        },
-        {
-          name: '配送',
-          max: 52000
-        },
-        {
-          name: '热度',
-          max: 25000
-        }]
-      },
-      series: [
-        {
-          name: '运营指标',
-          type: 'radar',
-          data: [
+
+  props: {
+    data: Object
+  },
+
+  watch: {
+    data() {
+      this.update()
+    }
+  },
+
+  methods: {
+    update() {
+      if (this.data) {
+        const { data, indicator } = this.data.salesRadar
+        // 渲染echarts雷达图
+        this.options = {
+          radar: {
+            name: {},
+            indicator: indicator
+          },
+          series: [
             {
-              value: [4300, 10000, 28000, 35000, 50000, 19000],
-              name: '预期'
-            },
-            {
-              value: [5000, 14000, 28000, 31000, 42000, 21000],
-              name: '实际'
+              name: '运营指标',
+              type: 'radar',
+              data
             }
           ]
         }
-      ]
+      }
     }
+
   }
 }
 </script>

@@ -21,6 +21,61 @@
 </template>
 
 <script type="text/ecmascript-6">
+function createOptions(title, value, data) {
+  return {
+    title: [
+      {
+        text: title,
+        textStyle: {
+          color: 'rgba(255,255,255,.3)',
+          fontSize: 12
+        },
+        top: 3
+      },
+      {
+        text: value,
+        textStyle: {
+          color: '#fff',
+          fontSize: 16,
+          fontWeight: 500
+        },
+        top: '43%',
+        left: '32%'
+      }
+    ],
+    tooltip: {
+      trigger: 'item',
+      formatter(params) {
+        return `${params.data.name}<br/>${params.data.value}`
+      }
+    },
+    series: [
+      {
+        name: title,
+        type: 'pie',
+        radius: ['65%', '80%'],
+        label: {
+          show: false
+        },
+        data: [{
+          value: data[0],
+          name: '数据',
+          itemStyle: {
+            color: 'rgb(0,140,217)'
+          }
+        },
+        {
+          value: data[1],
+          name: '数据',
+          itemStyle: {
+            color: 'rgb(35,69,145)'
+          }
+        }]
+      }
+    ]
+  }
+}
+
 export default {
   name: 'SalePie',
 
@@ -32,70 +87,28 @@ export default {
     }
   },
 
-  methods: {
-
+  props: {
+    data: Object
   },
 
-  mounted() {
-    function createOptions(title, value, data) {
-      return {
-        title: [
-          {
-            text: title,
-            textStyle: {
-              color: 'rgba(255,255,255,.3)',
-              fontSize: 12
-            },
-            top: 3
-          },
-          {
-            text: value,
-            textStyle: {
-              color: '#fff',
-              fontSize: 16,
-              fontWeight: 500
-            },
-            top: '43%',
-            left: '32%'
-          }
-        ],
-        tooltip: {
-          trigger: 'item',
-          formatter(params) {
-            return `${params.data.name}<br/>${params.data.value}`
-          }
-        },
-        series: [
-          {
-            name: title,
-            type: 'pie',
-            radius: ['65%', '80%'],
-            label: {
-              show: false
-            },
-            data: [{
-              value: data[0],
-              name: '数据',
-              itemStyle: {
-                color: 'rgb(0,140,217)'
-              }
-            },
-            {
-              value: data[1],
-              name: '数据',
-              itemStyle: {
-                color: 'rgb(35,69,145)'
-              }
-            }]
-          }
-        ]
+  watch: {
+    data() {
+      this.update()
+    }
+  },
+
+  methods: {
+    update() {
+      if (this.data && this.data.salePie) {
+        const [data1, data2, data3] = this.data.salePie
+        this.options1 = createOptions(data1.name, data1.total, data1.data)
+        this.options2 = createOptions(data2.name, data2.total, data2.data)
+        this.options3 = createOptions(data3.name, data3.total, data3.data)
       }
     }
 
-    this.options1 = createOptions('转化率', '13%', [1000, 130])
-    this.options2 = createOptions('退单率', '5%', [1000, 50])
-    this.options3 = createOptions('跳失率', '43%', [1000, 430])
   }
+
 }
 </script>
 

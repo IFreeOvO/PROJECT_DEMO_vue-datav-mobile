@@ -5,12 +5,12 @@
   >
     <div class="datav-wrapper">
       <top-header></top-header>
-      <sales-bar></sales-bar>
-      <sale-line></sale-line>
-      <sale-pie></sale-pie>
-      <sale-map></sale-map>
-      <sale-sun></sale-sun>
-      <sales-radar></sales-radar>
+      <sales-bar :data="data"></sales-bar>
+      <sale-line :data="data"></sale-line>
+      <sale-pie :data="data"></sale-pie>
+      <sale-map :data="data"></sale-map>
+      <sale-sun :data="data"></sale-sun>
+      <sales-radar :data="data"></sales-radar>
     </div>
   </div>
   <div
@@ -62,10 +62,12 @@ export default {
       }
     }, 200)
 
-    getScreenMobileData().then(res => {
+    getScreenMobileData().then(data => {
       this.loading = false
       this.task && clearInterval(this.task)
-      this.data = res.data
+      this.$nextTick(() => {
+        this.data = data
+      })
     })
   }
 
